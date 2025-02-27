@@ -1,4 +1,3 @@
-# Bus-Booking-and-Reservation
 # Bus Booking and Reservation System
 
 ## Overview

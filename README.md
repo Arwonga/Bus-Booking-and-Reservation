@@ -19,7 +19,7 @@ This is a web-based **Bus Booking and Reservation System** that allows users to 
 ## Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/bus-booking.git
+   git clone https://github.com/arwonga/bus-booking-and-reservation.git
    ```
 2. Navigate to the project folder:
    ```sh

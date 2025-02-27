@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEAT SELECTION</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: maroon;
+      font-size: 1.4em;
+    }
+    .bus-container {
+      display: inline-block;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .seats-container {
+      display: grid;
+      grid-template-columns: repeat(5, auto);
+      gap: 10px;
+      padding: 20px;
+      background: #ddd;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .seat {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      border: 2px solid #333;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .seat:hover {
+      opacity: 0.8;
+      transform: scale(1.2); /* Makes seat 10% larger */
+    }
+    .seat.selected {
+      background: red !important;
+      color: black;
+      border-color: black;
+    }
+    .aisle {
+      width: 20px;
+    }
+    .pay-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .pay-button:hover {
+      background: maroon;
+    }
+    .ticket-popup {
+      margin-top: 20px;
+      padding: 15px;
+      color: black;
+      border-radius: 15px;
+      display: inline-block;
+      box-shadow: 0px 4px 10px rgba(24, 170, 5, 0.9);
+    }
+    /* Seat colors by section */
+    .seat.front { background: darkblue; color: white; }
+    .seat.middle { background: darkgreen; color: white; }
+    .seat.back { background: maroon; color: white; }
+    /* Booked seats - disabled and visually different */
+.seat.booked {
+  background: linear-gradient(to bottom, #555, #333);
+  color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+  </style>
+</head>
+<body>
+  <h1>Customize Your Journey</h1>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    
+    function BusSeats() {
+  const [selectedSeat, setSelectedSeat] = React.useState(null);
+  const [ticketNumber, setTicketNumber] = React.useState(null);
+  const [price, setPrice] = React.useState(0);
+  const [bookedSeats, setBookedSeats] = React.useState(new Set()); // Store booked seats
+
+  const seatPrices = { front: 20, middle: 15, back: 10 };
+
+  const handleSeatClick = (seat, category) => {
+    if (bookedSeats.has(seat)) return; // Prevent selecting booked seats
+
+    setSelectedSeat(seat);
+    setPrice(seatPrices[category]);
+    setTicketNumber(null);
+  };
+
+  const handlePayment = () => {
+    if (selectedSeat) {
+      const randomTicket = `TCK${Math.floor(100000 + Math.random() * 900000)}`;
+      setTicketNumber(randomTicket);
+      setBookedSeats((prev) => new Set(prev).add(selectedSeat)); // Mark seat as booked
+      setSelectedSeat(null); // Deselect after booking
+      alert(`Payment Successful! Your ticket number is: ${randomTicket}`);
+    } else {
+      alert("Please select a seat first.");
+    }
+  };
+
+  const rows = 10;
+  const cols = 4;
+  const aisleIndex = 2;
+
+  return (
+    <div className="bus-container">
+      <h2>Select Your Seat</h2>
+      <div className="seats-container">
+        {[...Array(rows)].map((_, row) => (
+          <React.Fragment key={row}>
+            {[...Array(cols + 1)].map((_, col) => {
+              if (col === aisleIndex) return <div key={`aisle-${row}`} className="aisle"></div>;
+              const seatNumber = `${row + 1}${col < aisleIndex ? "A" : "B"}`;
+
+              let seatClass = "seat";
+              let category = "back";
+              if (row < 3) {
+                seatClass += " front";
+                category = "front";
+              } else if (row < 7) {
+                seatClass += " middle";
+                category = "middle";
+              }
+
+              if (bookedSeats.has(seatNumber)) {
+                seatClass += " booked"; // Apply booked style
+              }
+
+              return (
+                <button
+                  key={seatNumber}
+                  className={`${seatClass} ${selectedSeat === seatNumber ? "selected" : ""}`}
+                  onClick={() => handleSeatClick(seatNumber, category)}
+                  disabled={bookedSeats.has(seatNumber)}
+                >
+                  {bookedSeats.has(seatNumber) ? "Booked" : seatNumber}
+                </button>
+              );
+            })}
+          </React.Fragment>
+        ))}
+      </div>
+      <p><strong>Selected Seat:</strong> {selectedSeat || "None"} | <strong>Price:</strong> ${price}</p>
+      <button className="pay-button" onClick={handlePayment}>Pay Now</button>
+
+      {ticketNumber && (
+        <div className="ticket-popup">
+          <h3>Ticket Confirmed</h3>
+          <p><strong>Seat:</strong> {selectedSeat}</p>
+          <p><strong>Price:</strong> ${price}</p>
+          <p><strong>Ticket No:</strong> {ticketNumber}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<BusSeats />);
+  </script>
+</body>
+</html>

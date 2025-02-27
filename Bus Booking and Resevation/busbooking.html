@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DREAMLINE EXPRESS </title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.js"></script>
+    <style>
+body {
+    background-image: url(image/bus/13.jpeg);
+    background-repeat: no-repeat; /* Prevents image from repeating */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+    background-attachment: fixed; /* Keeps the image fixed while scrolling */
+}
+.navbar {
+            padding: 15px 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            margin-top: 3%;
+            background-color: black;
+}
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.navbar li {
+    display: inline;
+    margin: 0 15px;
+    color: grey;
+    font-weight:200;
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.0em;
+    padding: 10px 20px;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar a:hover {
+    color: greenyellow;
+}
+
+.promotions li {
+    color: maroon;
+    display: inline;
+    margin: 0 30px;
+    font-size: 1.5em;
+}
+.promop p {
+    font-size: 1.15em;
+}
+.promotions ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.promotions {
+    padding: 10px 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            margin-top: 3%;
+            background-color: whitesmoke;
+            margin-bottom: 3em;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+.promotions img {
+    width: 50px;
+    height: 50px;
+}
+.logo img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1em;
+    text-align: center;
+    margin-left: 47%;
+}
+.search-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+            margin-left: 4em;
+            margin-top: 5em;
+        }
+input, select, button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+button {
+            background-color:maroon;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+button:hover {
+            background-color: yellowgreen;
+        }
+label {
+    color: maroon;
+}
+.container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Creates 4 equal columns */
+            gap: 10px;
+            height: auto;
+            padding: 10px;
+        }
+
+.column {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            color: black;
+            margin-top: 3em;
+        }
+.column a {
+    text-decoration: none;
+    color: black;
+}
+.column a:hover {
+    color: maroon;
+}
+.image-container {
+    display: flex;            /* Enables flexbox layout */
+    justify-content: space-evenly; /* Distributes space evenly between items */
+    align-items: center;      /* Centers images vertically if needed */
+    gap: 80px;                /* Sets a fixed space between images */
+    height: 250px;
+    margin-bottom:7em ;
+    margin-top: 4em;
+}
+.image-container1 {
+    display: flex;            /* Enables flexbox layout */
+    justify-content: space-evenly; /* Distributes space evenly between items */
+    align-items: center;      /* Centers images vertically if needed */
+    gap: 80px;                /* Sets a fixed space between images */
+    height: 250px;
+    margin-bottom:7em ;
+    margin-top: 4em;
+}
+.image-item {
+    text-align: center;         /* Center-align the text below each image */
+    width: 200px;               /* Set width for each image-item block */
+}
+.image-container img {
+    width: 300px;             /* Adjust the size of the images */
+    height: 300px;             /* Maintain aspect ratio */
+}
+.image-container1 img {
+    width: 300px;             /* Adjust the size of the images */
+    height: 300px;             /* Maintain aspect ratio */
+}
+footer {
+    display: grid;                                /* Use Grid layout */
+    grid-template-columns: repeat(4, 1fr);       /* 4 equal-width columns */
+    gap: 20px;                                    /* Space between columns */
+    padding: 20px;                                /* Padding around the footer */
+    background-color: black;                       /* Background color of the footer */
+    color: white;                                 /* Text color */ 
+    font-size: 1.1em;
+    text-align: left;
+}
+.footer-section img {
+    width: 20px;
+    height: 20px;
+}
+.power img {
+    width: auto;
+    height: auto;
+}
+footer a {
+    text-decoration: none;
+    color: white;
+}
+footer a:hover {
+    color: greenyellow;
+}
+.caption {
+    background-color: white;
+    font-size: 1.05em;
+    color: black;
+
+}
+    </style>
+    <script>
+        function searchBus() {
+            let from = document.getElementById("from").value;
+            let to = document.getElementById("to").value;
+            let dateOfTravel = document.getElementById("dateOfTravel").value;
+            let returnDate = document.getElementById("returnDate").value;
+            
+            if (!from || !to || !dateOfTravel) {
+                alert("Please fill in the required fields!");
+                return;
+            }
+            
+            alert(`Searching for buses from ${from} to ${to} on ${dateOfTravel}${returnDate ? " and returning on " + returnDate : ""}`);
+        }
+    </script>
+</head>
+<body>
+    <li><div class="logo"><img src="image/bus/DREAMLINE.png" href=""></div></li>
+    <nav class="navbar">
+        <ul>
+           
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contactus">Contact Us</a></li>
+            <li><a href="printticket.html">Print Ticket</a></li>
+            <li><a href="#account">Sign In/Register</a></li>
+        </ul>
+    </nav>
+    <div class="promotions">
+        <ul>
+            <li> <img src="image/bus/crown.png" >  VIP Services </li>
+            <li> <img src="image/bus/free-wifi.png" >  Onboard WiFi</li>
+            <li> <img src="image/bus/plug.png" >  Power Outlets</li>
+            <li> <img src="image/bus/person.png">  Extra Legroom</li>       
+        </ul>
+        <ul>
+            <li> <img src="image/bus/save.png" alt=""> Save</li>
+            <div class="promop"><p>Pay less when using our new Mobile App. You can save up to 25% of your Promo Cash balance in a single purchase.</p></div>
+            <li> <img src="image/bus/points.png" alt=""> Points</li>
+            <div class="promop"><p>Receive more credit during promotional periods which will be added into your Promo Cash account.</p></div>
+        </ul>
+    </div>
+    <div class="search-container">
+        <label>From:</label>
+        <input type="text" id="from" placeholder="Enter departure city">
+        <label>To:</label>
+        <input type="text" id="to" placeholder="Enter destination city">
+        
+        <label>Date:</label>
+        <input type="date" id="dateOfTravel">
+        
+        <label>Return Date:</label>
+        <input type="date" id="returnDate">
+        
+        <a href="bus.html"> <button onclick="searchBus()">Search</button></a>
+    </div>
+    <div class="container">
+        <div class="column">
+            <a href=""><p>From Nirobi</p></a>
+            <a href=""><p>Nairobi-Mombasa</p></a>
+            <a href=""><p>Nairobi-Kigali</p></a>
+            <a href=""><p>Nirobi-Kampala</p></a>
+            <a href=""><p>Nairobi-Malindi</p></a>
+        </div>
+        <div class="column">
+            <a href=""><p>From Mombasa</p></a>
+            <a href=""><p>Mombasa-Eldoret</p></a>
+            <a href=""><p>Mombasa-Kitui</p></a>
+            <a href=""><p>Mombasa-Mumias</p></a>
+            <a href=""><p>Mombasa-Nakuru</p></a>
+            <a href=""><p>Mombasa-Nairobi</p></a>
+        </div>
+        <div class="column">
+            <a href=""><p>From Kampala</p></a>
+            <a href=""><p>Kampala-Bunjumbura</p></a>
+            <a href=""><p>Kamoala-Nairobi</p></a>
+            <a href=""><p>Kampala-Daresalam</p></a>
+        </div>
+        <div class="column">
+            <a href=""><p>From Kitui</p></a>
+            <a href=""><p>Kitui-Mombasa</p></a>
+            <a href=""><p>Kitui-Malindi</p></a>
+        </div>
+    </div>
+    <div class="image-container">
+        <div class="image-item">
+            <img src="image/bus/3.jpeg" alt="">
+            <p class="caption">Interior Scania GWE Blue</p>
+        </div>
+        <div class="image-item">
+            <img src="image/bus/1.jpeg" alt="">
+            <p class="caption">Interior Zhongton ABW Dark</p>
+        </div>
+        <div class="image-item">
+            <img src="image/bus/9.jpeg" alt="">
+            <p class="caption">Interior Scania AWS Red</p>
+        </div>
+    </div>
+    <div class="image-container1">
+        <div class="image-item">
+            <img src="image/bus/16.jpeg" alt="">
+            <p class="caption">Interior Isuzu LGB Blue</p>
+        </div>
+        <div class="image-item">
+            <img src="image/bus/17.jpeg" alt="">
+            <p class="caption">Interior Yutogh AZX Gold</p>
+        </div>
+        <div class="image-item">
+            <img src="image/bus/18.jpeg" alt="">
+            <p class="caption">Interior Scania IOK Dark</p>
+        </div>
+    </div>
+<footer>
+    <div class="footer-section">
+        <a href=""><p>Privacy Policy</p></a>
+        <a href=""><p>Legal Policy</p></a>
+        <a href=""><p>Financial Policy</p></a>
+    </div>
+    <div class="footer-section">
+        <a href=""><p>&copy; 2025 DreamLine. All Rights Reserved.</p></a>
+        <a href=""><p>Help</p></a>
+    </div>
+   
+    <div class="footer-section">
+        <a href=""><p><img src="image/bus/gmail.png">  @gmail.com</p></a>
+        <a href=""><p><img src="image/bus/instagram.png">instagram@dreamline.com</p></a>
+        <a href=""><p><img src="image/bus/facebook.png">facebook@dreamline.com</p></a>
+        <a href=""><p><img src="image/bus/twitter.png">x@dreamline.com</p></a>
+    </div>
+    <div class="footer-section">
+        <a href=""><p>Powered By</p></a>
+        <div class="power">
+            <a href=""><img src="image/bus/CODEXPLORER (2).png" alt=""></a>
+        </div>
+    </div>
+</footer>
+</body>
+    

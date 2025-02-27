@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUS SELECTION</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .bus-container { display: flex; flex-wrap: wrap; gap: 20px;}
+        .bus-card { 
+            border: 1px solid #ddd; 
+            padding: 15px; 
+            width: 30%; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            transform: perspective(1000px) rotateY(0deg); 
+            transition: transform 0.5s ease-in-out; 
+        }
+        .bus-card:hover { 
+            background-color: #f0f0f0; 
+            transform: perspective(1000px) rotateY(10deg); 
+        }
+        .selected { background-color: #c0f0c0 !important; }
+        .bus-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        h1 {
+            text-align: center;
+            color: maroon;
+        }
+        .bus-card a {
+            color: maroon;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+        .bus-card a:hover {
+            color: green;
+        }
+    </style>
+    <script>
+        function selectBus(busId) {
+            document.querySelectorAll('.bus-card').forEach(bus => bus.classList.remove('selected'));
+            document.getElementById(busId).classList.add('selected');
+            alert("You selected bus " + busId);
+        }
+    </script>
+</head>
+<body>
+    <h1>Select a Bus</h1>
+    <div class="bus-container">
+        <script>
+            const buses = [
+                { id: 1, name: "Express Bus", seats: 40, time: "10:00 AM", image: "image/bus/19.jpeg" },
+                { id: 2, name: "Luxury Coach", seats: 35, time: "11:00 AM", image: "image/bus/20.jpeg" },
+                { id: 3, name: "Fast Travel", seats: 30, time: "12:00 PM", image: "image/bus/21.jpeg" },
+                { id: 4, name: "Speedy Ride", seats: 25, time: "1:00 PM", image: "image/bus/22.jpeg" },
+                { id: 5, name: "Comfort Wheels", seats: 20, time: "2:00 PM", image: "image/bus/24.jpeg" },
+                { id: 6, name: "Quick Shuttle", seats: 18, time: "3:00 PM", image: "image/bus/25.jpeg" },
+                { id: 7, name: "Elite Travels", seats: 22, time: "4:00 PM", image: "image/bus/8.jpeg" },
+                { id: 8, name: "Swift Bus", seats: 28, time: "5:00 PM", image: "image/bus/10.jpeg" },
+                { id: 9, name: "Metro Express", seats: 32, time: "6:00 PM", image: "image/bus/11.jpeg" },
+                { id: 10, name: "City Runner", seats: 27, time: "7:00 PM", image: "image/bus/12.jpeg" }
+            ];
+
+            buses.forEach(bus => {
+                document.write(`
+                    <div class="bus-card" id="bus${bus.id}" onclick="selectBus('${bus.id}')">
+                        <html><a href="seatselection.html">Click to select</a></html>
+                        <img src="${bus.image}" alt="${bus.name}" class="bus-image">
+                        <h2>${bus.name}</h2>
+                        <p>Seats Available: ${bus.seats}</p>
+                        <p>Departure: ${bus.time}</p>
+                    </div>
+                `);
+            });
+        </script>
+    </div>
+</body>
+</html>
